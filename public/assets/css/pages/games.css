@@ -1,0 +1,43 @@
+.main {
+    justify-content: flex-start;
+}
+
+.select {
+    text-align: left;
+    background-color: var(--base);
+    padding: 1em;
+    border: none;
+    border-radius: 0.75em;
+    margin: 1em;
+    color: var(--text-color);
+}
+
+.searchbar:focus {
+    outline: none;
+}
+
+.games {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    max-width: var(--main-width);
+}
+
+.game {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--main-width) / 45);
+    padding: calc(var(--main-width) / 40);
+    margin: calc(var(--main-width) / 90);
+    background-color: var(--background-color);
+    border-radius: 0.75em;
+}
+
+.game:hover {
+    filter: brightness(1.2)
+}
+
+.hidden {
+    display: none;
+}

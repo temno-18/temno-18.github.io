@@ -17,10 +17,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const toggle = document.getElementById('sidebartoggle');
     const hide = document.getElementById('sidebarhide');
     const show = document.getElementById('sidebarshow');
-    hide.addEventListener('click', () => {
+    hide.addEventListener('click', function(e) {
+        e.preventDefault();
         hideSidebar(sidebar, toggle);
     });
-    show.addEventListener('click', () => {
+    show.addEventListener('click', function(e) {
+        e.preventDefault();
         showSidebar(sidebar, toggle);
     });
 });

@@ -4,4 +4,6 @@
     --base: #24273a;
     --text-color: #f88c00;
     --font: Nuggets;
+    --sidebar-width: 35px;
+    --main-width: calc(100vw - 35px);
 }

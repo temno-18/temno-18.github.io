@@ -1,6 +1,7 @@
 ---
 import Layout from '@l/Layout.astro';
 import Proxy from '@s/Proxy.astro';
+import PromptClose from '@s/PromptClose.astro';
 import StaticJS from '@s/StaticJS.astro';
 const url = Astro.url;
 const search = url.searchParams.get('q') ?? undefined;
@@ -17,8 +18,10 @@ const Define = `
 
 <Layout name="Search">
     <link slot="head" rel="stylesheet" href={import.meta.env.replacement + '/assets/css/pages/search.css'}>
-	<div class="main">
-        <iframe id="iframe"></iframe>
+	<div id="main" class="main">
+        <div id="tabs">
+            <iframe id="iframe"></iframe>
+        </div>
         <form class="search" id="search">
             <input id="url" spellcheck="false" autocomplete="off" autocapitalize="off" class="searchbar" type="text" placeholder="Start Searching...">
         </form>
@@ -29,4 +32,5 @@ const Define = `
     <StaticJS/>
     <Fragment set:html={Define} />
     <script type="module" src={import.meta.env.replacement + '/assets/js/proxy.js'} defer></script>
+    <PromptClose/>
 </Layout>

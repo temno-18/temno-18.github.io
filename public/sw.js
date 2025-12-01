@@ -6,12 +6,12 @@ if (navigator.userAgent.includes("Firefox")) {
 }
 
 const params = new URLSearchParams(location.search);
-const replacement = params.get('r');
+const replacement = params.get('r') ?? '';
 
 importScripts(`${replacement}/sj/scramjet.all.js`);
 importScripts(`${replacement}/uv/uv.bundle.js`);
 importScripts(`${replacement}/uv/uv.config.js`);
-importScripts(__uv$config.sw);
+importScripts(`${replacement}/uv/uv.sw.js`);
 
 const { ScramjetServiceWorker } = $scramjetLoadWorker();
 

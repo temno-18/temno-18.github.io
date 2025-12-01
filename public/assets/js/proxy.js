@@ -1,3 +1,7 @@
+const replacement = window.replacement ?? '';
+const wispVal = window.wispVal;
+const routeQuery = window.routeQuery;
+
 const loadingSrc = `<head>
     <link rel="stylesheet" href="${replacement}/assets/css/loading.css">
 </head>
@@ -30,7 +34,10 @@ const scramjet = new ScramjetController({
 try {
   if (navigator.serviceWorker) {
     scramjet.init();
-    navigator.serviceWorker.register(`./sw.js?r=${replacement}`);
+    if (replacement)
+      navigator.serviceWorker.register(`./sw.js?r=${replacement}`);
+    else
+      navigator.serviceWorker.register(`./sw.js`);
   } else {
     console.warn("Service workers not supported");
   }
@@ -39,8 +46,6 @@ try {
 }
 
 let wispUrl;
-const wispVal = window.wispVal;
-const routeQuery = window.routeQuery;
 if (wispVal === 'default' || wispVal === 'undefined') {
   wispUrl = (location.protocol === "https:" ? "wss" : "ws") + "://" + location.host + "/wisp/";
 } else {

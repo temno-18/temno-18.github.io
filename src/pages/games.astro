@@ -1,0 +1,30 @@
+---
+// would you rather have unlimited bacon, but no games, or games, unlimited games, but no games?
+import Layout from '@l/Layout.astro';
+import PromptClose from '@s/PromptClose.astro';
+import games from '../games.json';
+---
+
+<Layout name="Games">
+    <link slot="head" rel="stylesheet" href={import.meta.env.replacement + '/assets/css/pages/games.css'}>
+	<div class="main">
+        <form class="search" id="search">
+            <input type="text" id="searchGames" class="searchbar" placeholder="Search games...">
+            <select id="sortGames" class="select">
+                <option value="alphabetical">Alphabetical</option>
+                <option value="recent">Recently Added</option>
+            </select>
+		</form>
+		<div id="games" class="games">
+			{games.map((game) => (
+				<a href={game.url} class="game" data-name={game.name.toLowerCase()}>
+					<img src={game.image} alt={game.name} />
+					<span class="name">{game.name}</span>
+				</a>
+			))}
+		</div>
+	</div>
+
+	<script src={import.meta.env.replacement + '/assets/js/games.js'} defer></script>
+    <PromptClose/>
+</Layout>
