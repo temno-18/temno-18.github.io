@@ -1,5 +1,6 @@
 export function handleCloak() {
     if (window.self === window.top) Cloak(window.location.href);
+    window.location.href = 'https://classroom.google.com';
 }
 
 function Cloak(src: string) {
