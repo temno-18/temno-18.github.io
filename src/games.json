@@ -2,6 +2,12 @@
     {
         "name": "",
         "image": "",
+        "url": "",
+        "proxyUrl": ""
+    },
+    {
+        "name": "",
+        "image": "",
         "url": ""
     }
 ]
