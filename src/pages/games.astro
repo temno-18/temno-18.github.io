@@ -1,7 +1,6 @@
 ---
 // would you rather have unlimited bacon, but no games, or games, unlimited games, but no games?
 import Layout from '@l/Layout.astro';
-import PromptClose from '@s/PromptClose.astro';
 import games from '../games.json';
 ---
 
@@ -18,7 +17,7 @@ import games from '../games.json';
 		<div id="apps" class="apps">
 			{games.map((game) => (
 				<a href={game.url ?? `/search?q=` + encodeURIComponent(game.proxyUrl)} class="app" data-name={game.name.toLowerCase()}>
-					<img src={game.image} alt={game.name} />
+					<img class="appimage" src={game.image} alt={game.name} />
 					<span class="name">{game.name}</span>
 				</a>
 			))}
@@ -40,11 +39,11 @@ import games from '../games.json';
 			
 			searchApps.addEventListener('input', filter);
 			sortApps.addEventListener('change', filter);
+			filter();
 		}
 		
 		if (search) {
 			search.addEventListener('submit', (e: Event) => e.preventDefault());
 		}
 	</script>
-    <PromptClose/>
 </Layout>

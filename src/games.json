@@ -1,13 +1,8 @@
 [
     {
-        "name": "",
-        "image": "",
-        "url": "",
-        "proxyUrl": ""
-    },
-    {
-        "name": "",
-        "image": "",
-        "url": ""
+        "name": "Cookie Clicker",
+        "image": "https://play-lh.googleusercontent.com/Z1MOuuiD05ZN5LkVmMEvKF0mqAc-FknaQ2j8s4dZiO-LSPQX4EEA3RVJdlQEtxe96ok",
+        "url": null,
+        "proxyUrl": "https://orteil.dashnet.org/cookieclicker/"
     }
 ]

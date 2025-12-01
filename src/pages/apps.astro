@@ -16,7 +16,7 @@ import apps from '../apps.json';
 		<div id="apps" class="apps">
 			{apps.map((app) => (
 				<a href={`/search?q=` + encodeURIComponent(app.url)} class="app" data-name={app.name.toLowerCase()}>
-					<img src={app.image} alt={app.name} />
+					<img class="appimage" src={app.image} alt={app.name} />
 					<span class="name">{app.name}</span>
 				</a>
 			))}
@@ -38,6 +38,7 @@ import apps from '../apps.json';
 			
 			searchApps.addEventListener('input', filter);
 			sortApps.addEventListener('change', filter);
+			filter();
 		}
 		
 		if (search) {

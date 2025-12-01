@@ -1,3 +1,7 @@
+select:focus {
+    outline: none;
+}
+
 .main {
     justify-content: flex-start;
 }
@@ -26,12 +30,16 @@
 
 .app {
     display: flex;
+    justify-content: center;
     flex-direction: column;
-    gap: calc(var(--main-width) / 45);
-    padding: calc(var(--main-width) / 40);
+    gap: calc(var(--main-width) / 90);
+    padding: calc(var(--main-width) / 50);
     margin: calc(var(--main-width) / 90);
     background-color: var(--background-color);
     border-radius: 0.75em;
+    max-width: calc(var(--main-width) / 15);
+    height: calc(var(--main-width) / 10);
+    text-align: center;
 }
 
 .app:hover {
@@ -40,4 +48,8 @@
 
 .hiddenapp {
     display: none;
+}
+
+.appimage {
+    border-radius: 10px;
 }
