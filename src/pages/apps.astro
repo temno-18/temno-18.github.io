@@ -1,25 +1,23 @@
 ---
-// would you rather have unlimited bacon, but no games, or games, unlimited games, but no games?
 import Layout from '@l/Layout.astro';
-import PromptClose from '@s/PromptClose.astro';
-import games from '../games.json';
+import apps from '../apps.json';
 ---
 
-<Layout name="Games">
+<Layout name="Apps">
     <link slot="head" rel="stylesheet" href={replacement + '/assets/css/pages/apps.css'}>
 	<div class="main">
         <form class="search" id="search">
-            <input type="text" id="searchApps" class="searchbar" placeholder="Search games...">
+            <input type="text" id="searchApps" class="searchbar" placeholder="Search applications...">
             <select id="sortApps" class="select">
                 <option value="alphabetical">Alphabetical</option>
                 <option value="recent">Recently Added</option>
             </select>
 		</form>
 		<div id="apps" class="apps">
-			{games.map((game) => (
-				<a href={game.url} class="app" data-name={game.name.toLowerCase()}>
-					<img src={game.image} alt={game.name} />
-					<span class="name">{game.name}</span>
+			{apps.map((app) => (
+				<a href={`/search?q=` + encodeURIComponent(app.url)} class="app" data-name={app.name.toLowerCase()}>
+					<img src={app.image} alt={app.name} />
+					<span class="name">{app.name}</span>
 				</a>
 			))}
 		</div>
@@ -46,5 +44,4 @@ import games from '../games.json';
 			search.addEventListener('submit', (e: Event) => e.preventDefault());
 		}
 	</script>
-    <PromptClose/>
 </Layout>

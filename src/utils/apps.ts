@@ -1,13 +1,13 @@
-interface GameOrder {card: HTMLElement; index: number;}
+interface AppOrder {card: HTMLElement; index: number;}
 
-export function filterGames(searchGames: HTMLInputElement, sortGames: HTMLSelectElement, games: HTMLElement, game: HTMLElement[], order: GameOrder[]): void {
-    const query = searchGames.value.toLowerCase();
-    const sort = sortGames.value;
+export function filterApps(searchApps: HTMLInputElement, sortApps: HTMLSelectElement, apps: HTMLElement, app: HTMLElement[], order: AppOrder[]): void {
+    const query = searchApps.value.toLowerCase();
+    const sort = sortApps.value;
 
-    let visible = game.filter(card => {
+    let visible = app.filter(card => {
         const name = card.getAttribute('data-name') || '';
         const matches = name.includes(query);
-        card.classList.toggle('hiddengame', !matches);
+        card.classList.toggle('hiddenapp', !matches);
         return matches;
     });
 
@@ -25,9 +25,9 @@ export function filterGames(searchGames: HTMLInputElement, sortGames: HTMLSelect
         });
     }
 
-    visible.forEach(card => games.appendChild(card));
+    visible.forEach(card => apps.appendChild(card));
 }
 
-export function orderGames(game: HTMLElement[]): GameOrder[] {
-    return game.map((card, index) => ({ card, index }));
+export function orderApps(app: HTMLElement[]): AppOrder[] {
+    return app.map((card, index) => ({ card, index }));
 }
