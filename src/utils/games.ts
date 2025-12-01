@@ -1,19 +1,13 @@
-const searchGames = document.getElementById('searchGames');
-const sortGames = document.getElementById('sortGames');
-const games = document.getElementById('games');
-const game = Array.from(document.querySelectorAll('.game'));
-const search = document.getElementById('search');
+interface GameOrder {card: HTMLElement; index: number;}
 
-const order = game.map((card, index) => ({ card, index }));
-
-function filter() {
+export function filterGames(searchGames: HTMLInputElement, sortGames: HTMLSelectElement, games: HTMLElement, game: HTMLElement[], order: GameOrder[]): void {
     const query = searchGames.value.toLowerCase();
     const sort = sortGames.value;
 
     let visible = game.filter(card => {
         const name = card.getAttribute('data-name') || '';
         const matches = name.includes(query);
-        card.classList.toggle('hidden', !matches);
+        card.classList.toggle('hiddengame', !matches);
         return matches;
     });
 
@@ -34,6 +28,6 @@ function filter() {
     visible.forEach(card => games.appendChild(card));
 }
 
-searchGames.addEventListener('input', filter);
-sortGames.addEventListener('change', filter);
-search.addEventListener('submit', (e) => e.preventDefault());
+export function orderGames(game: HTMLElement[]): GameOrder[] {
+    return game.map((card, index) => ({ card, index }));
+}

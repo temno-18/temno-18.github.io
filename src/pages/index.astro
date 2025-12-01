@@ -5,7 +5,7 @@ import Layout from '@l/Layout.astro';
 <Layout>
 	<div class="main">
 		<div class="title">
-			<img class="title-image" src={import.meta.env.replacement + '/assets/imgs/nuggets.png'}>
+			<img class="title-image" src={replacement + '/assets/imgs/nuggets.png'}>
 			<h1>Nuggets</h1>
 			<p class="desc">An innovative web proxy built for simplicity and near-global compatibility.</p>
 		</div>
@@ -13,5 +13,14 @@ import Layout from '@l/Layout.astro';
 			<input id="url" spellcheck="false" autocomplete="off" autocapitalize="off" class="searchbar" type="text" placeholder="Start Searching...">
 		</form>
 	</div>
-	<script src={import.meta.env.replacement + '/assets/js/search.js'} defer></script>
+    <script>
+        import { handleSearch } from "../utils/search";
+        const search = document.getElementById('search') as HTMLFormElement | null;
+        const url = document.getElementById('url') as HTMLInputElement | null;
+        if (search && url) {
+            search.addEventListener('submit', (event: Event) => {
+                handleSearch(search, url, event);
+            });
+        }
+    </script>
 </Layout>

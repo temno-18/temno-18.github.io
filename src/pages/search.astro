@@ -2,35 +2,57 @@
 import Layout from '@l/Layout.astro';
 import Proxy from '@s/Proxy.astro';
 import PromptClose from '@s/PromptClose.astro';
-import StaticJS from '@s/StaticJS.astro';
-const url = Astro.url;
-const search = url.searchParams.get('q') ?? undefined;
-const wispUrl = import.meta.env.wispUrl;
-const theme = import.meta.env.theme;
-const Define = `
-<script>
-    window.wispVal = '${wispUrl}';
-    window.routeQuery = '${search}';
-    window.theme = '${theme}';
-</script>
-`;
+const href = Astro.url.searchParams.get('q');
+const Define = `<script>
+    const replacement = '${replacement}';
+    const wispVal = '${import.meta.env.wispUrl}';
+    const routeQuery = '${href ?? undefined}';
+    const theme = '${import.meta.env.theme}';
+</script>`;
 ---
 
 <Layout name="Search">
-    <link slot="head" rel="stylesheet" href={import.meta.env.replacement + '/assets/css/pages/search.css'}>
+    <link slot="head" rel="stylesheet" href={replacement + '/assets/css/pages/search.css'}>
 	<div id="main" class="main">
-        <div id="tabs">
-            <iframe id="iframe"></iframe>
-        </div>
+        <iframe id="iframe"></iframe>
         <form class="search" id="search">
             <input id="url" spellcheck="false" autocomplete="off" autocapitalize="off" class="searchbar" type="text" placeholder="Start Searching...">
         </form>
 	</div>
 
-    <script src={import.meta.env.replacement + '/baremux/index.js'} defer></script>
+    <script src={replacement + '/baremux/index.js'} defer></script>
     <Proxy/>
-    <StaticJS/>
     <Fragment set:html={Define} />
-    <script type="module" src={import.meta.env.replacement + '/assets/js/proxy.js'} defer></script>
+    <script>
+        import { iframeLoading, init, getWisp, setTransport, loadUrl, handleSubmit } from "../utils/proxy";
+        
+        document.addEventListener('DOMContentLoaded', async () => {
+            const iframe = document.getElementById("iframe") as HTMLIFrameElement | null;
+            const url = document.getElementById("url") as HTMLInputElement | null;
+            const search = document.getElementById("search") as HTMLFormElement | null;
+            
+            if (routeQuery !== 'undefined' && iframe) {
+                iframeLoading(iframe, replacement);
+            }
+            
+            const scramjet = init(replacement);
+            const wispUrl = getWisp(wispVal);
+
+            const connection = new window.BareMux.BareMuxConnection(`${replacement}/baremux/worker.js`);
+            await setTransport(connection, "epoxy", replacement, wispUrl);
+            const config = { replacement, wispVal, scramjet, proxy: 'scramjet' };
+
+            if (routeQuery !== 'undefined' && iframe && url) {
+                const decodedQuery = decodeURIComponent(routeQuery);
+                loadUrl(decodedQuery, config, iframe, url);
+            }
+
+            if (search && url && iframe) {
+                search.addEventListener("submit", (event: Event) => {
+                    handleSubmit(event, url, config, iframe);
+                });
+            }
+        });
+    </script>
     <PromptClose/>
 </Layout>

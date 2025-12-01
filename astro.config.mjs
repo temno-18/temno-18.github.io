@@ -16,7 +16,7 @@ export default defineConfig({
     output: output,
     adapter: staticBuild ? undefined : node({mode: "middleware"}),
     vite: {
-        define: { 'import.meta.env.replacement': replacement },
+        define: { 'replacement': replacement },
         plugins: [viteStaticCopy({targets:[
             {src: `${scramjetPath}/**/*`.replace(/\\/g, "/"), dest: "sj"},
             {src: `${uvPath}/**/*`.replace(/\\/g, "/"), dest: "uv"},

@@ -6,7 +6,7 @@ import games from '../games.json';
 ---
 
 <Layout name="Games">
-    <link slot="head" rel="stylesheet" href={import.meta.env.replacement + '/assets/css/pages/games.css'}>
+    <link slot="head" rel="stylesheet" href={replacement + '/assets/css/pages/games.css'}>
 	<div class="main">
         <form class="search" id="search">
             <input type="text" id="searchGames" class="searchbar" placeholder="Search games...">
@@ -25,6 +25,26 @@ import games from '../games.json';
 		</div>
 	</div>
 
-	<script src={import.meta.env.replacement + '/assets/js/games.js'} defer></script>
+	<script>
+		import { filterGames, orderGames } from "../utils/games";
+		const searchGames = document.getElementById('searchGames') as HTMLInputElement | null;
+		const sortGames = document.getElementById('sortGames') as HTMLSelectElement | null;
+		const games = document.getElementById('games') as HTMLElement | null;
+		const gameElements = Array.from(document.querySelectorAll<HTMLElement>('.game'));
+		const search = document.getElementById('search') as HTMLFormElement | null;
+		
+		if (searchGames && sortGames && games) {
+			const order = orderGames(gameElements);
+			
+			const filter = () => filterGames(searchGames, sortGames, games, gameElements, order);
+			
+			searchGames.addEventListener('input', filter);
+			sortGames.addEventListener('change', filter);
+		}
+		
+		if (search) {
+			search.addEventListener('submit', (e: Event) => e.preventDefault());
+		}
+	</script>
     <PromptClose/>
 </Layout>

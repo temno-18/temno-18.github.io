@@ -4,7 +4,17 @@ import Svg from '@c/Svg.astro';
 <div class="SideBarToggle hidden" id="sidebartoggle">
     <Svg title="Show Sidebar" class="bar-item" name="show" id="sidebarshow"/>
 </div>
-<script type="module" src={import.meta.env.replacement + '/assets/js/sidebar.js'} defer></script>
+<script>
+    import { hideSidebar, showSidebar } from "../utils/sidebar";
+    const sidebar = document.getElementById('sidebar');
+    const toggle = document.getElementById('sidebartoggle');
+    const hide = document.getElementById('sidebarhide');
+    const show = document.getElementById('sidebarshow');
+    if (sidebar && toggle && hide && show) {
+        hide.addEventListener('click', function(e: Event) { e.preventDefault(); hideSidebar(sidebar, toggle); });
+        show.addEventListener('click', function(e: Event) { e.preventDefault(); showSidebar(sidebar, toggle); });
+    }
+</script>
 <div id="sidebar" class="SideBar shown">
     <div>
         <Svg title="Home" class="bar-item" name="outline" url="/"/>
@@ -25,6 +35,13 @@ import Svg from '@c/Svg.astro';
     <div>
         <Svg title="Cloak with about:blank" class="bar-item" name="open" id="cloak"/>
         <Svg title="Hide Sidebar" class="bar-item" name="hide" id="sidebarhide"/>
-        <script type="module" src={import.meta.env.replacement + '/assets/js/cloak.js'} defer></script>
+        <script>
+            import { handleCloak } from '../utils/cloak';
+            const button = document.getElementById('cloak');
+            if (window.self !== window.top) button?.remove();
+            button?.addEventListener('click', () => {
+                handleCloak();
+            });
+        </script>
     </div>
 </div>

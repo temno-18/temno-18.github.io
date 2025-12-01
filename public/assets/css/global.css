@@ -60,11 +60,17 @@ a {
     width: var(--sidebar-width);
     min-width: var(--sidebar-width);
     flex-basis: var(--sidebar-width);
-    flex-basis: var(--sidebar-width);
     height: 100vh;
     border-right: var(--border-bar);
     background-color: var(--base);
-    transition: transform 0.3s ease-in-out, flex-basis 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out, flex-basis 0.3s ease-in-out, min-width 0.3s ease-in-out;
+}
+
+.SideBar.hidden {
+    flex-basis: 0;
+    min-width: 0;
+    border-right: none;
+    overflow: hidden;
 }
 
 .SideBarToggle {
