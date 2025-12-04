@@ -117,25 +117,22 @@ p {
 }
 
 #newtab {
+    margin: 0;
     border-radius: 50%;
     aspect-ratio: 1;
-    text-align: center;
-    font-size: 0.8em;
-    line-height: 1.3em;
     width: 1.5em;
     height: 1.5em;
     user-select: none;
     background-color: inherit;
     transition: background-color 0.2s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #newtab:hover {
     cursor: pointer;
     background-color: var(--highlight-color, #ffffff33);
-}
-
-#newtab {
-    margin: 4px;
 }
 
 #address {
@@ -150,6 +147,7 @@ p {
 
 .navbutton {
     display: flex;
+    align-items: center;
     height: 50%;
 }
 
