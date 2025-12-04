@@ -45,7 +45,10 @@ export function loadApps(apps: App[], appsContainer: HTMLElement, replacement: s
 
         const image = document.createElement('img');
         image.className = 'image';
-        image.src = replacement + app.image;
+        if (app.image.startsWith('http'))
+            image.src = app.image;
+        else
+            image.src = replacement + app.image;
         image.alt = app.name;
 
         const name = document.createElement('span');
