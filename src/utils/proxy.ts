@@ -292,7 +292,8 @@ export function handleSubmit(
 
 export function setupIframe(
     iframe: HTMLIFrameElement,
-    config: ProxyConfig
+    config: ProxyConfig,
+    replacement: string
 ): void {
     const tabId = iframe.getAttribute('data-tab-id');
     if (!tabId) return;
@@ -327,8 +328,8 @@ export function setupIframe(
                     urlInput.value = decodedUrl;
                 }
                 
-                            import('../utils/tabs').then(({ updateUrl }) => {
-                    updateUrl(tabId, decodedUrl);
+                import('../utils/tabs').then(({ updateUrl }) => {
+                    updateUrl(tabId, decodedUrl, replacement);
                 });
                 
                             addHistory(tabId, decodedUrl);

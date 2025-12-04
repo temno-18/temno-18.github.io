@@ -73,14 +73,14 @@ const Define = `<script>
             const scramjet = init(replacement);
             const wispUrl = getWisp(wispVal);
 
-            const selectedProxy = localStorage.getItem('proxy') || import.meta.env.proxy;
-            const selectedTransport = localStorage.getItem('transport') || import.meta.env.transport;
+            const selectedProxy = localStorage.getItem('proxy') || 'scramjet';
+            const selectedTransport = localStorage.getItem('transport') || 'epoxy';
             const connection = new window.BareMux.BareMuxConnection(`/bareworker.js`);
             await setTransport(connection, selectedTransport, replacement, wispUrl);
             const config = { replacement, wispVal, scramjet, proxy: selectedProxy };
 
             if (iframe) {
-                setupIframe(iframe, config);
+                setupIframe(iframe, config, replacement);
             }
 
             if (routeQuery !== undefined && iframe && url) {
@@ -89,7 +89,7 @@ const Define = `<script>
                 
                 const activeTab = getActiveTab();
                 if (activeTab) {
-                    updateUrl(activeTab.getAttribute('data-tab-id') || '', url.value);
+                    updateUrl(activeTab.getAttribute('data-tab-id') || '', url.value, replacement);
                 }
                 
                 setTimeout(() => updateBookmark(), 500);
@@ -104,7 +104,7 @@ const Define = `<script>
                         
                         const activeTab = getActiveTab();
                         if (activeTab) {
-                            updateUrl(activeTab.getAttribute('data-tab-id') || '', url.value);
+                            updateUrl(activeTab.getAttribute('data-tab-id') || '', url.value, replacement);
                         }
                         
                         setTimeout(() => updateBookmark(), 500);
@@ -154,7 +154,7 @@ const Define = `<script>
                 mutations.forEach((mutation) => {
                     mutation.addedNodes.forEach((node) => {
                         if (node instanceof HTMLIFrameElement && node.classList.contains('tab-iframe')) {
-                            setupIframe(node, config);
+                            setupIframe(node, config, replacement);
                         }
                     });
                 });

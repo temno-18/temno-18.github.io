@@ -34,7 +34,7 @@ export function newTab(tabs: HTMLElement, newtab: HTMLElement, content: HTMLElem
     newIframe.classList.add('active');
 
     updateAddress(newTab);
-    setupIframe(tabId);
+    setupIframe(tabId, replacement);
 
     const closeButton = newTab.querySelector('#close');
     if (closeButton) {
@@ -115,7 +115,7 @@ export function closeTab(tab: HTMLElement, tabs: HTMLElement, newtab: HTMLElemen
     }, 200);
 }
 
-export function updateUrl(tabId: string, url: string): void {
+export function updateUrl(tabId: string, url: string, replacement: string): void {
     const tab = document.querySelector(`#tab[data-tab-id="${tabId}"]`) as HTMLElement;
     if (tab) {
         tab.setAttribute('data-url', url);
@@ -124,11 +124,11 @@ export function updateUrl(tabId: string, url: string): void {
             updateAddress(tab);
         }
 
-        updateMeta(tabId);
+        updateMeta(tabId, replacement);
     }
 }
 
-export function updateMeta(tabId: string): void {
+export function updateMeta(tabId: string, replacement: string): void {
     const tab = document.querySelector(`#tab[data-tab-id="${tabId}"]`) as HTMLElement;
     const iframe = document.querySelector(`.tab-iframe[data-tab-id="${tabId}"]`) as HTMLIFrameElement;
 
@@ -150,7 +150,7 @@ export function updateMeta(tabId: string): void {
 
         const faviconElement = tab.querySelector('#favicon') as HTMLImageElement;
         if (faviconElement) {
-            const favicon = getFavicon(iframeDoc, iframe.src);
+            const favicon = getFavicon(iframeDoc, iframe.src, replacement);
             if (favicon) {
                 faviconElement.src = favicon;
                 faviconElement.onerror = () => {
@@ -164,7 +164,7 @@ export function updateMeta(tabId: string): void {
     }
 }
 
-function getFavicon(doc: Document, iframeSrc: string): string | null {
+function getFavicon(doc: Document, iframeSrc: string, replacement: string): string | null {
     const iconLinks = [
         doc.querySelector('link[rel="icon"]'),
         doc.querySelector('link[rel="shortcut icon"]'),
@@ -182,7 +182,7 @@ function getFavicon(doc: Document, iframeSrc: string): string | null {
 
     try {
         const url = new URL(iframeSrc);
-        return `${url.origin}/favicon.ico`;
+        return `${replacement}/assets/imgs/favicon.png`;
     } catch (e) {
         return null;
     }
@@ -207,13 +207,13 @@ function resolve(href: string, baseUrl: string): string {
     }
 }
 
-export function setupIframe(tabId: string): void {
+export function setupIframe(tabId: string, replacement: string): void {
     const iframe = document.querySelector(`.tab-iframe[data-tab-id="${tabId}"]`) as HTMLIFrameElement;
     if (!iframe) return;
 
     iframe.addEventListener('load', () => {
         setTimeout(() => {
-            updateMeta(tabId);
+            updateMeta(tabId, replacement);
         }, 100);
     });
 
@@ -226,7 +226,7 @@ export function setupIframe(tabId: string): void {
 
         const iframeDoc = iframe.contentDocument || iframe.contentWindow?.document;
         if (iframeDoc) {
-            updateMeta(tabId);
+            updateMeta(tabId, replacement);
         }
     }, 1000);
 
