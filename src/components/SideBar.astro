@@ -2,7 +2,7 @@
 import Svg from '@c/Svg.astro';
 ---
 <div class="SideBarToggle hidden" id="sidebartoggle">
-    <Svg title="Show Sidebar" class="bar-item" name="arrow" style="transform: rotate(180deg); transform-origin: center;" id="sidebarshow"/>
+    <Svg title="Show Sidebar" class="bar-item" name="arrow" style="transform: rotate(180deg); transform-origin: center;" id="sidebarshow" url="#"/>
 </div>
 <script>
     import { hideSidebar, showSidebar } from "../utils/sidebar";
@@ -27,8 +27,10 @@ import Svg from '@c/Svg.astro';
         </div>
     </div>
     <div>
-        <Svg title="Cloak with about:blank" class="bar-item" name="open" id="cloak"/>
-        <Svg title="Hide Sidebar" class="bar-item" name="arrow" id="sidebarhide"/>
+        <div class="icons">
+            <Svg title="Cloak with about:blank" class="bar-item" name="open" id="cloak" url="https://classroom.google.com"/>
+            <Svg title="Hide Sidebar" class="bar-item" name="arrow" id="sidebarhide" url="#"/>
+        </div>
         <script>
             import { handleCloak } from '../utils/cloak';
             const button = document.getElementById('cloak');
