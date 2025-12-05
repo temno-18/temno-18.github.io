@@ -26,6 +26,8 @@ select:focus {
     align-items: center;
     justify-content: center;
     max-width: var(--main-width);
+    max-height: 100vw;
+    overflow: visible;
 }
 
 .app {
