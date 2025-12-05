@@ -16,18 +16,23 @@ select:focus {
     color: var(--text-color);
 }
 
+.search {
+    flex-shrink: 0
+}
+
 .searchbar:focus {
     outline: none;
 }
 
 .apps {
     display: flex;
+    flex: 1;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
     max-width: var(--main-width);
-    max-height: 100vw;
-    overflow: visible;
+    max-height: 100vh;
+    overflow-y: auto;
 }
 
 .app {

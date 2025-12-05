@@ -114,7 +114,8 @@ a {
     justify-content: center;
     height: 100vh;
     flex-grow: 1;
-    color: var(--text-color)
+    color: var(--text-color);
+    overflow: hidden;
 }
 
 .title {
