@@ -1,5 +1,6 @@
 ---
 import SideBar from '@c/SideBar.astro';
+import Slop from '@c/Slop.astro';
 interface Props {
     name?: string;
 }
@@ -37,10 +38,19 @@ const Theme = `<script>
 
         <meta name="title" content="Nugget Recipes">
         <meta name="description" content="Various Chicken Nugget Recipes">
+        <meta name="twitter:url" content="https://www.microsoft.com/en-us">
+        <meta name="twitter:title" content="Nugget Recipes">
+        <meta name="twitter:description" content="Explore Microsoft products and services and support for your home or business. Shop Microsoft 365, Copilot, Teams, Xbox, Windows, Azure, Surface and more.">
+        <meta name="twitter:card" content="summary">
+        <meta property="og:url" content="https://www.microsoft.com/en-us">
+        <meta property="og:title" content="Nugget Recipes">
+        <meta property="og:description" content="Explore Microsoft products and services and support for your home or business. Shop Microsoft 365, Copilot, Teams, Xbox, Windows, Azure, Surface and more.">
+        <meta property="og:type" content="website">
         <slot name="head"/>
     	<Fragment set:html={Theme} />
     </head>
     <body>
+        <Slop/>
         <SideBar/>
         <slot/>
     </body>
