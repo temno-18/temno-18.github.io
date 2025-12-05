@@ -49,9 +49,11 @@ const Theme = `<script>
         <slot name="head"/>
     	<Fragment set:html={Theme} />
     </head>
-    <Slop/>
-    <body class="pleaseignorethisisverunimportanteducationalstuffthatshouldbedisregardedbyanyoneseeingthisitdoesnotdisplayatallitisirrelevantpleaseignorethis">
-        <SideBar/>
-        <slot/>
+    <body>
+        <Slop/>
+        <div class="pleaseignorethisisverunimportanteducationalstuffthatshouldbedisregardedbyanyoneseeingthisitdoesnotdisplayatallitisirrelevantpleaseignorethis">
+            <SideBar/>
+            <slot/>
+        </div>
     </body>
 </html>
