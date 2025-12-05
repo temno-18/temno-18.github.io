@@ -50,6 +50,7 @@ select:focus {
     max-width: calc(var(--main-width) / 15);
     height: calc(var(--main-width) / 10);
     text-align: center;
+    word-break: break-all;
 }
 
 .app:hover {
