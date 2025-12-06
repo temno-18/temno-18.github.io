@@ -37,7 +37,7 @@ export default defineConfig({
                 src: `${uvPath}/**/*`.replace(/\\/g, "/"), 
                 dest: "n", 
                 rename: (name, extension, fullPath) => {
-                    if (`${name}.${extension}` === 'nuggets.config.js') return false;
+                    if (`${name}.${extension}` === 'uv.config.js') return 'uv.config.js';
                     const match = `${name}.${extension}`.match(/^uv\.(.*)\.js$/);
                     return match ? `nuggets.${match[1]}.js` : `${name}.${extension}`;
                 }
