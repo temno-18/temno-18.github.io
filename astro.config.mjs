@@ -20,6 +20,7 @@ export default defineConfig({
     base: staticBuild ? JSON.parse(replacement) : '/',
     build: {
         assets: "_astro",
+        finesse: 'always',
     },
     vite: {
         define: { 'replacement': replacement },
