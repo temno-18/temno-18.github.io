@@ -48,9 +48,9 @@ export function init(replacement: string): any {
     const chicken = new ScramjetController({
         prefix: "/~/s/",
         files: {
-            wasm: `${replacement}/sj/chicken.wasm.wasm`,
-            all: `${replacement}/sj/chicken.all.js`,
-            sync: `${replacement}/sj/chicken.sync.js`,
+            wasm: `${replacement}/c/chicken.wasm.wasm`,
+            all: `${replacement}/c/chicken.all.js`,
+            sync: `${replacement}/c/chicken.sync.js`,
         },
     });
 
