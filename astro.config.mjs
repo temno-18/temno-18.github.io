@@ -29,7 +29,16 @@ export default defineConfig({
             {src: `${uvPath}/**/*`.replace(/\\/g, "/"), dest: "uv"},
             {src: `${epoxyPath}/**/*`.replace(/\\/g, "/"), dest: "epoxy"},
             {src: `${libcurlPath}/**/*`.replace(/\\/g, "/"), dest: "libcurl"},
-            {src: `${baremuxPath}/**/*`.replace(/\\/g, "/"), dest: "baremux"},
+            {
+                src: `${baremuxPath}/**/*`.replace(/\\/g, "/"), 
+                dest: "baremux",
+                transform: (content, filename) => {
+                    if (filename.endsWith('index.js')) {
+                        return content.toString().replace(/!e\.startsWith\("\/"\)&&/g, '!e.startsWith("/")&&!e.startsWith(".")&&');
+                    }
+                    return content;
+                }
+            },
             {src: `${baremuxPath}/worker.js`.replace(/\\/g, "/"), dest: ".", rename: "bareworker.js"},
         ]})],
         server: {
