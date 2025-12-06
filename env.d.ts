@@ -3,7 +3,7 @@
 interface ImportMetaEnv {
   readonly replacement: string | '';
   readonly wispUrl: string | 'default';
-  readonly prefix: string | '';
+  readonly parent: string | '';
   theme: string | 'default';
   proxy: string | 'scramjet';
   transport: string | 'epoxy';
