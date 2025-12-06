@@ -3,7 +3,6 @@
 interface ImportMetaEnv {
   readonly replacement: string | '';
   readonly wispUrl: string | 'default';
-  readonly parent: string | '';
   theme: string | 'default';
   proxy: string | 'scramjet';
   transport: string | 'epoxy';
@@ -15,4 +14,4 @@ interface ImportMeta {
 
 declare const routeQuery: any;
 declare const wispVal: any;
-declare const prefix: any;
+declare const bareworker: any;

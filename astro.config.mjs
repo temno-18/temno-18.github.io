@@ -6,14 +6,18 @@ import { baremuxPath } from '@mercuryworkshop/bare-mux/node';
 import { scramjetPath } from '@mercuryworkshop/scramjet/path';
 import { defineConfig } from "astro/config";
 import { viteStaticCopy } from "vite-plugin-static-copy";
-
+import { readFileSync } from 'fs';
+import { join } from 'path';
 
 const staticBuild = process.env.staticBuild === "static";
 const output = staticBuild ? "static" : "server";
 let replacement;
 import packagejson from './package.json';
-if (staticBuild) replacement=JSON.stringify(`https://cdn.jsdelivr.net/npm/@nuggetscorporation/nuggets@${packagejson.version}/dist`);
-else replacement=JSON.stringify('');
+
+if (staticBuild) replacement = JSON.stringify(`https://cdn.jsdelivr.net/npm/@nuggetscorporation/nuggets@${packagejson.version}/dist`);
+else replacement = JSON.stringify('');
+const bareworkerdata = readFileSync(join(baremuxPath, 'worker.js'), 'utf-8');
+
 export default defineConfig({
     output: output,
     adapter: staticBuild ? undefined : node({mode: "middleware"}),
@@ -22,13 +26,25 @@ export default defineConfig({
         assets: "_astro",
     },
     vite: {
-        define: { 'replacement': replacement },
+        define: { 
+            'replacement': replacement,
+            'bareworker': JSON.stringify(`data:text/javascript;base64,${Buffer.from(bareworkerdata).toString('base64')}`)
+        },
         plugins: [viteStaticCopy({targets:[
             {src: `${scramjetPath}/**/*`.replace(/\\/g, "/"), dest: "sj"},
             {src: `${uvPath}/**/*`.replace(/\\/g, "/"), dest: "uv"},
             {src: `${epoxyPath}/**/*`.replace(/\\/g, "/"), dest: "epoxy"},
             {src: `${libcurlPath}/**/*`.replace(/\\/g, "/"), dest: "libcurl"},
-            {src: `${baremuxPath}/**/*`.replace(/\\/g, "/"), dest: "baremux"},
+            {
+                src: `${baremuxPath}/**/*`.replace(/\\/g, "/"), 
+                dest: "baremux",
+                transform: (content, filename) => {
+                    if (filename.endsWith('index.js')) {
+                        return content.toString().replace(/!e\.startsWith\("\/"\)&&/g, '');
+                    }
+                    return content;
+                }
+            },
             {src: `${baremuxPath}/worker.js`.replace(/\\/g, "/"), dest: ".", rename: "bareworker.js"},
         ]})],
         server: {

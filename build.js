@@ -6,38 +6,21 @@ import path from 'path';
 
 const argv = yargs(hideBin(process.argv)).options({
     'wisp': {
-        alias: 'w',
+        alias: 'ca',
         type: 'string',
         description: 'Wisp URL',
-    },
-    'parent': {
-        alias: 'p',
-        type: 'string',
-        description: 'Prefix (If deploying on websites like github pages)',
     },
 }).parse();
 
 if (argv.wisp) {
     process.env.wispUrl = argv.wisp;
-    console.log(`Using wisp: ${argv.wisp}`);
+    console.log
 } else {
     process.env.wispUrl = 'default';
     if (process.env.staticBuild === 'static') {
         process.env.wispUrl="nuggetscorporation.org/wisp/";
         console.warn("No Wisp URL specified with --wisp <url>! Defaulting to wss://nuggetscorporation.org/wisp/")
     };
-}
-
-if (argv.parent) {
-    if (argv.parent.startsWith('/'))
-        process.env.prefix = argv.parent;
-    else
-        process.env.prefix = '/' + argv.parent;
-    if (process.env.prefix.endsWith('/'))
-        process.env.prefix = process.env.prefix.slice(0, -1);
-    console.log(`Using prefix: ${process.env.prefix}`);
-} else {
-    process.env.prefix = '';
 }
 
 const buildMode = process.env.staticBuild ? `--mode=${process.env.staticBuild}` : '';
