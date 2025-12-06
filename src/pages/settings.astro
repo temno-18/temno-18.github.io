@@ -15,8 +15,8 @@ import Layout from '@l/Layout.astro';
       <div class="field">
         <label for="proxysel">Proxy</label>
         <select id="proxysel">
-          <option value="scramjet">Scramjet</option>
-          <option value="uv">UV</option>
+          <option value="chicken">Scramjet</option>
+          <option value="nuggets">UV</option>
         </select>
       </div>
       <div class="field">
@@ -68,7 +68,7 @@ import Layout from '@l/Layout.astro';
           });
 
           const savedTheme = localStorage.getItem('theme') || 'default';
-          const savedProxy = localStorage.getItem('proxy') || 'scramjet';
+          const savedProxy = localStorage.getItem('proxy') || 'chicken';
           const savedTransport = localStorage.getItem('transport') || 'epoxy';
 
           themeSelect.value = savedTheme;
@@ -107,7 +107,7 @@ import Layout from '@l/Layout.astro';
             localStorage.removeItem('proxy');
             localStorage.removeItem('transport');
             themeSelect.value = 'default';
-            proxySelect.value = 'scramjet';
+            proxySelect.value = 'chicken';
             transportSelect.value = 'epoxy';
             applyTheme('default');
             saveBtn.textContent = originalSaveText;

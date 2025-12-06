@@ -70,14 +70,14 @@ const Define = `<script>
                 iframeLoading(iframe, replacement);
             }
             
-            const scramjet = init(replacement);
+            const chicken = init(replacement);
             const wispUrl = getWisp(wispVal);
 
-            const selectedProxy = localStorage.getItem('proxy') || 'scramjet';
+            const selectedProxy = localStorage.getItem('proxy') || 'chicken';
             const selectedTransport = localStorage.getItem('transport') || 'epoxy';
             const connection = new window.BareMux.BareMuxConnection('/bareworker.js');
             await setTransport(connection, selectedTransport, replacement, wispUrl);
-            const config = { replacement, wispVal, scramjet, proxy: selectedProxy };
+            const config = { replacement, wispVal, chicken, proxy: selectedProxy };
 
             if (iframe) {
                 setupIframe(iframe, config, replacement);

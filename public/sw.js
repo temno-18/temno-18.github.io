@@ -8,10 +8,10 @@ if (navigator.userAgent.includes("Firefox")) {
 const params = new URLSearchParams(location.search);
 const replacement = params.get('r') ?? '';
 
-importScripts(`${replacement}/sj/scramjet.all.js`);
-importScripts(`${replacement}/uv/uv.bundle.js`);
-importScripts(`${replacement}/uv/uv.config.js`);
-importScripts(`${replacement}/uv/uv.sw.js`);
+importScripts(`${replacement}/c/chicken.all.js`);
+importScripts(`${replacement}/n/nuggets.bundle.js`);
+importScripts(`${replacement}/n/nuggets.config.js`);
+importScripts(`${replacement}/n/nuggets.sw.js`);
 
 const { ScramjetServiceWorker } = $scramjetLoadWorker();
 

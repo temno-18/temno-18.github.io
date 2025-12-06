@@ -12,7 +12,7 @@ declare global {
 interface ProxyConfig {
     replacement: string;
     wispVal: string;
-    scramjet: any;
+    chicken: any;
     proxy: string;
 }
 
@@ -45,18 +45,18 @@ export function iframeLoading(iframe: HTMLIFrameElement, replacement: string): v
 export function init(replacement: string): any {
     const { ScramjetController } = window.$scramjetLoadController();
 
-    const scramjet = new ScramjetController({
+    const chicken = new ScramjetController({
         prefix: "/~/s/",
         files: {
-            wasm: `${replacement}/sj/scramjet.wasm.wasm`,
-            all: `${replacement}/sj/scramjet.all.js`,
-            sync: `${replacement}/sj/scramjet.sync.js`,
+            wasm: `${replacement}/sj/chicken.wasm.wasm`,
+            all: `${replacement}/sj/chicken.all.js`,
+            sync: `${replacement}/sj/chicken.sync.js`,
         },
     });
 
     try {
         if (navigator.serviceWorker) {
-            scramjet.init();
+            chicken.init();
             if (replacement)
                 navigator.serviceWorker.register(`/sw.js?r=${encodeURIComponent(replacement)}`);
             else
@@ -65,10 +65,10 @@ export function init(replacement: string): any {
             console.warn("Service workers not supported");
         }
     } catch (e) {
-        console.error("Failed to initialize Scramjet:", e);
+        console.error("Failed to initialize:", e);
     }
 
-    return scramjet;
+    return chicken;
 }
 
 export function getWisp(wispVal: string): string {
@@ -111,7 +111,7 @@ export function searchUrl(input: string): string {
 
 function decodeProxyUrl(proxyUrl: string, config: ProxyConfig): string {
     try {        
-        if (config.proxy === 'scramjet') {
+        if (config.proxy === 'chicken') {
             const prefix = '/~/s/';            
             if (proxyUrl.includes(prefix)) {
                 const prefixIndex = proxyUrl.indexOf(prefix);
@@ -263,8 +263,8 @@ function loadDirect(
 ): void {
     let url: string;
 
-    if (config.proxy === 'scramjet') {
-        url = config.scramjet.encodeUrl(decodedUrl);
+    if (config.proxy === 'chicken') {
+        url = config.chicken.encodeUrl(decodedUrl);
     } else {
         url = window.__uv$config.prefix + window.__uv$config.encodeUrl(decodedUrl);
     }

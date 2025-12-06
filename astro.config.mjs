@@ -25,8 +25,22 @@ export default defineConfig({
     vite: {
         define: { 'replacement': replacement },
         plugins: [viteStaticCopy({targets:[
-            {src: `${scramjetPath}/**/*`.replace(/\\/g, "/"), dest: "sj"},
-            {src: `${uvPath}/**/*`.replace(/\\/g, "/"), dest: "uv"},
+            {
+                src: `${scramjetPath}/**/*`.replace(/\\/g, "/"), 
+                dest: "c", 
+                rename: (name, extension, fullPath) => {
+                    const match = `${name}.${extension}`.match(/^scramjet\.(.*)\.js$/);
+                    return match ? `chicken.${match[1]}.js` : `${name}.${extension}`;
+                }
+            },
+            {
+                src: `${uvPath}/**/*`.replace(/\\/g, "/"), 
+                dest: "n", 
+                rename: (name, extension, fullPath) => {
+                    const match = `${name}.${extension}`.match(/^uv\.(.*)\.js$/);
+                    return match ? `nuggets.${match[1]}.js` : `${name}.${extension}`;
+                }
+            },
             {src: `${epoxyPath}/**/*`.replace(/\\/g, "/"), dest: "epoxy"},
             {src: `${libcurlPath}/**/*`.replace(/\\/g, "/"), dest: "libcurl"},
             {
