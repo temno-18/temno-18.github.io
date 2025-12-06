@@ -1,6 +1,11 @@
 {
   "name": "@nuggetscorporation/nuggets",
-  "version": "1.0.7",
+  "version": "1.0.8",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
   "description": "Nuggets",
   "main": "server.mjs",
   "type": "module",
