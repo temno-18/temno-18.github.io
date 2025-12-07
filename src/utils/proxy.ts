@@ -96,7 +96,7 @@ export async function setTransport(
 }
 
 export function searchUrl(input: string): string {
-    let template = "https://www.google.com/search?q=%s";
+    let template = "https://search.brave.com/search?q=%s";
     try {
         return new URL(input).toString();
     } catch (err) {}
