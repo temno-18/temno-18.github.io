@@ -47,7 +47,6 @@ server.listen(port, '0.0.0.0', () => {
 	const theme = chalk.hex('#f88c00');
 	const soap = chalk.hex('#ebaaee');
 	const host = chalk.hex('#cc6700');
-    const addr_color_idk_what_to_name_this = chalk.hex('#a8a8a8');
 	console.log(chalk.bold(theme(`
 d88b    88b                                     d8P          
 d88q8b  88b                                 d8888888888P          
@@ -70,10 +69,10 @@ d88'    88b'?88P'?8b'?88P''88b'?88P''88b'?888P'  '?8b  '?888P'
     for (const name of Object.keys(nets)) {
         for (const net of nets[name]) {
             if (net.family === 'IPv4' && !net.internal) {
-                console.log(chalk.bold(addr_color_idk_what_to_name_this(`External:	http://${net.address}:${port}`)));
+                console.log(chalk.bold(host(`External:	http://${net.address}:${port}`)));
             }
             if (net.family === 'IPv4' && net.internal) {
-                console.log(chalk.bold(addr_color_idk_what_to_name_this(`Internal:	http://localhost:${port}`)));
+                console.log(chalk.bold(host(`Internal:	http://localhost:${port}`)));
             }
         }
     }
