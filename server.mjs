@@ -1,5 +1,6 @@
 import express from 'express';
 import chalk from 'chalk';
+import os from 'os';
 import serveStatic from 'serve-static';
 import finalhandler from 'finalhandler';
 import { createProxyMiddleware } from 'http-proxy-middleware';
@@ -45,7 +46,7 @@ server.listen(port, '0.0.0.0', () => {
 	const splashc = chalk.hex(splashcolor);
 	const theme = chalk.hex('#f88c00');
 	const soap = chalk.hex('#ebaaee');
-	const host = chalk.hex('cc6700');
+	const host = chalk.hex('#cc6700');
 	console.log(chalk.bold(theme(`
 d88b    88b                                     d8P          
 d88q8b  88b                                 d8888888888P          
@@ -63,8 +64,16 @@ d88'    88b'?88P'?8b'?88P''88b'?88P''88b'?888P'  '?8b  '?888P'
 	console.log(chalk.bold(`- ` + theme(`Synaptic`) + ` - Lead developer of Nuggets`));
 	console.log(chalk.bold(`- ` + soap(`soap phia`) + ` - Lead developer of Nuggets\n`));
 
-	console.log(chalk.bold(host(`
-Local:	http://localhost:${port},
-      	http://127.0.0.1:${port}`
-	)));
+    console.log(chalk.bold(theme(`Server is running on:`)));
+    const nets = os.networkInterfaces();
+    for (const name of Object.keys(nets)) {
+        for (const net of nets[name]) {
+            if (net.family === 'IPv4' && !net.internal) {
+                console.log(chalk.bold(host(`External:	http://${net.address}:${port}`)));
+            }
+            if (net.family === 'IPv4' && net.internal) {
+                console.log(chalk.bold(host(`Internal:	http://localhost:${port}`)));
+            }
+        }
+    }
 });
